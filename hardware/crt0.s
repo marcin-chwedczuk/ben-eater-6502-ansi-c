@@ -53,4 +53,4 @@ _init:    LDX     #$FF                 ; Initialize stack pointer to $01FF
 ; Back from main (this is also the _exit entry):  force a software break
 
 _exit:    JSR     donelib              ; Run destructors
-_forever: JMP     _forever             ; Stop CPU
+          BRK
