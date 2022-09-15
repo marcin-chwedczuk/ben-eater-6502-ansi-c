@@ -1,9 +1,6 @@
 
-// TODO: Change to const volatile pointers
-#define PORTB ((unsigned char*)0x6000u)
-#define PORTA ((unsigned char*)0x6001u)
-#define DDRB ((unsigned char*)0x6002u)
-#define DDRA ((unsigned char*)0x6003u)
+#include "memory_map.h"
+#include "lcd.h"
 
 #define E 0b10000000
 #define RW 0b01000000
@@ -26,6 +23,8 @@ int main() {
   lcd_instruction(
       0b00000110);  // Increment and shift cursor; don't shift display
   lcd_instruction(0b00000001);  // Clear display
+
+  lcd_init();
 
   p = hello_world;
   while (*p) {

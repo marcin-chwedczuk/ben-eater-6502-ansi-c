@@ -22,7 +22,7 @@ OBJ_FILES=$(patsubst %.s,%.o,$(ASM_FILES)) $(patsubst %.cc,%.o,$(C_FILES))
 
 # Compiler settings
 CPU=65c02
-CFLAGS=-t none -O --cpu $(CPU)
+CFLAGS=-t none -O --cpu $(CPU) -I src/include
 ASMFLAGS=-t none --cpu $(CPU)
 LDFLAGS=-C $(HW_DIR)/be6502.cfg
 
