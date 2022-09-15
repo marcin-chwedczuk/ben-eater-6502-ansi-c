@@ -15,7 +15,8 @@ ROM_IMAGE=rom.image
 # Grab only filenames _without_ directory prefix
 C_FILES=$(notdir $(wildcard $(SRC_DIR)/*.cc))
 ASM_FILES=$(notdir $(wildcard $(SRC_DIR)/*.s))
-OBJ_FILES=$(patsubst %.cc,%.o,$(C_FILES)) $(patsubst %.s,%.o,$(ASM_FILES))
+# Order is important, we may use functions from assembly in C but not in the other direction
+OBJ_FILES=$(patsubst %.s,%.o,$(ASM_FILES)) $(patsubst %.cc,%.o,$(C_FILES)) 
 
 # Compiler settings
 CPU=65c02
