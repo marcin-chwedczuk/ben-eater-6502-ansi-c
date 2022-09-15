@@ -1,6 +1,8 @@
 
+REPO_DIR = $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
+
 # Set cc65 compiler paths
-CC65_HOME = /Users/mc/devel/retro/ben-eater-6502/cc65
+CC65_HOME = $(REPO_DIR)/cc65
 BIN_DIR = $(CC65_HOME)/bin
 export CC65_INC = $(CC65_HOME)/include
 export LD65_LIB = $(CC65_HOME)/lib
@@ -42,8 +44,8 @@ app: $(addprefix $(BUILD_DIR)/,$(OBJ_FILES))
 		$^ $(HW_DIR)/be6502.lib
 
 # Oneoff action to create C runtime for Ben Eater 6502 computer
-.PHONY: mkcruntime
-mkcruntime: $(HW_DIR)/crt0.s $(HW_DIR)/be6502.cfg
+.PHONY: mkruntime
+mkruntime: $(HW_DIR)/crt0.s $(HW_DIR)/be6502.cfg
 	rm -f $(HW_DIR)/be6502.lib
 	cp $(CC65_HOME)/lib/supervision.lib $(HW_DIR)/be6502.lib
 	$(BIN_DIR)/ca65 $(HW_DIR)/crt0.s -o $(HW_DIR)/crt0.o 
